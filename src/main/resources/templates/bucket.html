@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Your bucket</title>
+</head>
+<body>
+<div th:insert="~{parts/menu ::#nav-menu}"></div>
+<h3>All sum -> <b th:text="${bucket.sum}">1000</b></h3>
+<table border="1">
+  <tr>
+    <td>Title</td>
+    <td>Amount</td>
+    <td>Price</td>
+    <td>Sum</td>
+    <td></td>
+  </tr>
+  <tr th:each="detail : ${bucket.bucketDetails}">
+    <td th:text="${detail.title}"></td>
+    <td th:text="${detail.amount}"></td>
+    <td th:text="${detail.price}"></td>
+    <td th:text="${detail.sum}"></td>
+    <td><a href="#">Remove</a></td>
+  </tr>
+</table>
+</body>
+</html>
