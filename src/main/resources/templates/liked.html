@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="parts/common :: head"></head>
+<head>
+    <title>Liked</title>
+</head>
+<body>
+<header th:insert="parts/menu"></header>
+<div class="container mt-5" style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+    <div th:each="book : ${liked.likedBooks}">
+        <div th:insert="parts/book"></div>
+    </div>
+</div>
+</body>
+</html>

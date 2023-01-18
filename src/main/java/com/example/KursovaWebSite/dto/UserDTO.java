@@ -1,17 +1,35 @@
 package com.example.KursovaWebSite.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.KursovaWebSite.models.user.Role;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Getter
+@Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
+    private Long id;
+
+    @NotBlank(message = "Username cannot be empty")
+    @Size(min = 3, max = 20, message = "Username should be between 3 and 20 characters")
     private String username;
+
+    @NotBlank(message = "Password cannot be empty")
+    @Size(min = 8, max = 15, message = "Password should be between 8 and 15 characters")
     private String password;
+
+    @NotBlank(message = "Password cannot be empty")
+    @Size(min = 8, max = 15, message = "Password should be between 8 and 15 characters")
     private String matchingPassword;
+
+    @Email(message = "Email is not correct")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
+
+    private String role;
 }

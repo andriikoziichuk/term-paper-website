@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="parts/common :: head"></head>
+<head>
+  <title>Blog site</title>
+</head>
+<body>
+<header th:insert="parts/menu"></header>
+
+<div class="container mt-5" >
+  <h1>Blog of the site</h1>
+  <div th:each="book : ${books}" class="alert alert-info mt-2">
+    <h3 th:text="${book.title}"></h3>
+    <h3 th:text="${book.description}"></h3>
+    <h3 th:text="${book.price}"></h3>
+    <h3 th:text="${book.author.fullName}"></h3>
+    <h3 th:text="${book.photoPath}"></h3>
+  </div>
+</div>
+</body>
+</html>

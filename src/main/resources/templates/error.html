@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="parts/common :: head"></head>
+
 <head>
   <meta charset="UTF-8">
   <title>Shop</title>
 </head>
 <body>
-<div th:insert="~{parts/menu ::#nav-menu}"></div>
+<header th:insert="parts/menu"></header>
 <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
 </body>
 </html>

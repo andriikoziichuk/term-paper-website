@@ -1,12 +1,8 @@
 package com.example.KursovaWebSite.config;
 
-import com.example.KursovaWebSite.domain.entity.Role;
-import com.example.KursovaWebSite.service.UserService;
+import com.example.KursovaWebSite.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,19 +10,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.persistence.Basic;
-
-@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserService userService;
+    private final UserDetailServiceImpl userService;
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public SecurityConfig(UserDetailServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -34,34 +26,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/users/*").hasAuthority(Role.ADMIN.name())
-//                .antMatchers("/users/new").hasAuthority(Role.ADMIN.name())
-                .anyRequest().permitAll()
+                .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/", "/auth/*", "/static/*", "/activate/*").permitAll()
+                .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and()
                     .formLogin()
-                    .loginPage("/login")
-                    .failureForwardUrl("/login-error")
-                    .loginProcessingUrl("/auth")
-                    .permitAll()
+                    .loginPage("/auth/login")
+                    .loginProcessingUrl("/process_login")
+                    .defaultSuccessUrl("/", true)
+                    .failureUrl("/auth/login?error")
                 .and()
-                    .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
-                    .invalidateHttpSession(true)
-                .and()
-                    .csrf().disable();
+                    .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/auth/login");
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
-    }
-
-    @Basic
-    public AuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
+        auth.userDetailsService(userService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Bean

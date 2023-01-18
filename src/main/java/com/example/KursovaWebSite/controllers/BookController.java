@@ -1,39 +1,32 @@
 package com.example.KursovaWebSite.controllers;
 
-import com.example.KursovaWebSite.dto.BookDTO;
-import com.example.KursovaWebSite.service.BookService;
+import com.example.KursovaWebSite.repositories.BookRepository;
+import com.example.KursovaWebSite.models.book.Book;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.security.Principal;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/books")
+@RequestMapping
 public class BookController {
 
-    private final BookService bookService;
+    private final BookRepository bookRepository;
 
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public BookController(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
-    @GetMapping
-    public String list(Model model) {
-        List<BookDTO> list = bookService.getAll();
-        model.addAttribute("books", list);
-        return "books";
-    }
-
-    @GetMapping("/{id}/bucket")
-    public String addBucket(@PathVariable Long id, Principal principal) {
-        if (principal == null)
-            return "redirect:/books";
-
-        bookService.addToUserBucket(id, principal.getName());
-        return "redirect:/books";
+    @GetMapping("/book/{id}")
+    public String bookDetails(@PathVariable(value = "id") Long id, Model model) {
+        Optional<Book> book = bookRepository.findById(id);
+        ArrayList<Book> books = new ArrayList<>();
+        book.ifPresent(books::add);
+        model.addAttribute("books", books);
+        return "book-details";
     }
 }

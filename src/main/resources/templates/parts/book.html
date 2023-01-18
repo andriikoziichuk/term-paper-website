@@ -1,0 +1,28 @@
+<body>
+<div th:fragment="book_block" style="margin: 40px">
+    <div class="book wrapper margin0auto" style="margin: 0 auto">
+        <div class="img">
+            <img th:src="${book.photoPath}" alt="">
+        </div>
+
+        <section>
+            <a th:href="'/book/' + ${book.id}" style="text-decoration: none">
+                <p th:text="${book.title}"></p>
+            </a>
+        </section>
+
+        <div class="price">
+            <p th:text="'$' + ${book.price}">$</p>
+            <div style="margin: auto 0">
+                <a th:href="@{/{id}/liked(id=${book.id})}" style="margin-right: 20px; text-decoration: none">
+                    <img class="cart scale" src="/site%20img/img_4.png" alt="">
+                </a>
+                <!--                th:src="${#lists.contains(liked, book)} ? '/site%20img/img_4.png' : '/site%20img/img_4_fill.png'" -->
+                <a th:href="@{/{id}/bucket(id=${book.id})}">
+                    <img class="cart scale" src="/site%20img/img.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

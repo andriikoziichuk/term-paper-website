@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="parts/common :: head"></head>
 <head>
-    <meta charset="UTF-8">
     <title>Shop</title>
 </head>
+<header th:insert="parts/menu"></header>
 <body>
-    <div th:insert="~{parts/menu ::#nav-menu}"></div>
-    <a th:href="@{/users/new}">Users</a>
-    <a th:href="@{/login}">Login</a>
+<div class="container mt-5" style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+    <div th:each="book : ${books}">
+        <div th:insert="parts/book"></div>
+    </div>
+</div>
 </body>
+<footer th:insert="parts/footer"></footer>
 </html>

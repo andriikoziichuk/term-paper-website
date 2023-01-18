@@ -1,6 +1,6 @@
 package com.example.KursovaWebSite.mapper;
 
-import com.example.KursovaWebSite.domain.book.Book;
+import com.example.KursovaWebSite.models.book.Book;
 import com.example.KursovaWebSite.dto.BookDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

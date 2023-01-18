@@ -1,41 +1,42 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div id="nav-menu" width="90%">
-    <table>
-        <tr>
-            <td >
-                <table align="center">
-                    <td>Menu -></td>
-                    <td><a th:href="@{/}">Home</a></td>
-                    <td><a th:href="@{/books}">Products</a></td>
-                    <td><a th:href="@{/login}">Login</a></td>
-                    <td sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/users}">Users</a></td>
-                    <td sec:authorize="isAuthenticated()"><a th:href="@{/bucket}">Bucket </a></td>
-                </table>
-            </td>
-            <td align="right">
-                <div sec:authorize="isAuthenticated()">
-                    <div>
-                        Hello, <a th:href="@{/users/profile}"><span sec:authentication="principal.username"></span></a>
-                    </div>
-                    <div>
-                        <a th:href="@{/logout}">Logout</a>
-                    </div>
-                </div>
-                <div sec:authorize="!isAuthenticated()">
-                    <div>
-                        Hello, Unknown. Please <a th:href="@{/login}">Log in</a>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+<div th:fragment="header" class="head">
+    <link rel="stylesheet" href="/style.css">
+    <a th:href="@{/}" class="logo scale make-it-slow">
+        <img src="/site img/img_1.png" alt="logo">
+    </a>
+
+    <div class="nav ml-30">
+        <ul>
+            <li sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/user}">USERS</a></li>
+        </ul>
+    </div>
+
+    <div class="nav">
+        <ul>
+            <li>
+                <form action="" method="get">
+                    <input type="text" id="search" class="form-control" name="title"
+                           placeholder="Search"/>
+                </form>
+            </li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/liked}"><img class="scale" src="/site%20img/img_4.png"
+                                                                              alt="liked"></a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/bucket}"><img class="scale" src="/site%20img/img.png"
+                                                                               alt="bucket"></a></li>
+        </ul>
+        <div sec:authorize="isAuthenticated()" class="nav" style="margin: auto 20px;">
+            <ul>
+                <li>Hello, <a th:href="@{/user/profile}"><span sec:authentication="principal.username"></span></a></li>
+            </ul>
+            <ul>
+                <li><a th:href="@{/logout}">Log out</a></li>
+            </ul>
+        </div>
+        <div sec:authorize="!isAuthenticated()" class="nav" style="margin: auto 20px;">
+            <ul>
+                <li>Hello, Unknown. Please <a th:href="@{/login}">Log in</a></li>
+            </ul>
+        </div>
+    </div>
+
 </div>
-</body>
-</html>
+

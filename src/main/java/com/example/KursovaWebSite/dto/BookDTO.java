@@ -1,14 +1,18 @@
 package com.example.KursovaWebSite.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class BookDTO {
     private Long id;
     private String title;
     private BigDecimal price;
+    private String photoPath;
+    private String authorFullName;
 }

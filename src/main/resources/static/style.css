@@ -1,6 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@500&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Lexend', sans-serif;
+}
 body {
-    background-color: blue;
+    background-color: #DCDCDC;
+
+}
+header {
+    background-color: white;
+}
+.book {
+    background-color: white;
 }
 .error {
     color: red;
 }
+.head {
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    border-radius: 0 0 20px 20px;
+}
+.nav ul {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.nav ul li {
+    list-style: none;
+    align-items: center;
+}
+.nav ul li a {
+    color: #70737C;
+    font-size: 16px;
+    font-family: Lexend, serif;
+    text-decoration: none;
+    align-items: center;
+}
+.nav ul li a:hover {
+    color: #7CC6ED;
+    transition: all 0.6s ease 0s;
+}
+.logo img {
+    display: block;
+    max-width:150px;
+    max-height:80px;
+    width: auto;
+    height: auto;
+}
+.nav {
+    justify-content: space-between;
+}
+.scale:hover {
+    transform: scale(1.1);
+    transition: all 0.6s ease 0s;
+}
+.nav ul li a img {
+    display: block;
+    max-width:30px;
+    max-height:30px;
+    width: auto;
+    height: auto;
+    margin-left: 30px;
+}
+input#search {
+    width: 250px;
+    height: 45px;
+    border-color: lightgrey;
+    border-radius: 20px;
+    background-image: url("site img/search.png");
+    background-repeat: no-repeat;
+    background-size: 35px;
+    background-position: left;
+    text-indent: 20px;
+    padding-left: 15px;
+    font-size: 14px;
+    outline: none;
+}
+input#search:focus {
+    border-color: lightgrey;
+}
+.mr-30 ul li a {
+    margin-right: 30px;
+}
+.ml-30 ul li a {
+    margin-left: 30px;
+}
+footer {
+    text-align: center;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    border-radius: 20px 20px 0 0;
+}
+.foot {
+    width: 80%;
+    margin: 0 auto;
+}
+hr {
+    width: 100%;
+}
+.foot div {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+footer label {
+    align-items: center;
+    display: block;
+    padding: 10px;
+}
+.wrapper{
+    width: 320px;
+    height: 470px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+.img img{
+    width: 294px;
+    height: 294px;
+}
+section a p{
+    color: gray;
+    width: 291px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 20px;
+}
+a p:hover {
+    color: #7CC6ED;
+    transition: all 0.6s ease 0s;
+}
+.img img{
+    margin: 10px;
+}
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+.cart{
+    width: 24px;
+    height: auto;
+}
+.price{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+.price p {
+    margin-left: 10px;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.make-it-slow {
+    box-shadow: 0 1px 2px rgba(0,0,0,0);
+    transition: box-shadow 0.4s ease-in-out;
+}
+
+/* Transition to a bigger shadow on hover */
+.make-it-slow:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.bucket
