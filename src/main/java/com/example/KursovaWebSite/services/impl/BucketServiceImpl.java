@@ -1,21 +1,18 @@
-package com.example.KursovaWebSite.service.impl;
+package com.example.KursovaWebSite.services.impl;
 
 import com.example.KursovaWebSite.repositories.BookRepository;
 import com.example.KursovaWebSite.repositories.BucketRepository;
 import com.example.KursovaWebSite.models.book.Book;
 import com.example.KursovaWebSite.models.user.Bucket;
 import com.example.KursovaWebSite.models.user.User;
-import com.example.KursovaWebSite.dto.BucketDTO;
-import com.example.KursovaWebSite.dto.BucketDetailDTO;
-import com.example.KursovaWebSite.service.BucketService;
-import com.example.KursovaWebSite.service.UserService;
+import com.example.KursovaWebSite.dtos.BucketDTO;
+import com.example.KursovaWebSite.dtos.BucketDetailDTO;
+import com.example.KursovaWebSite.services.BucketService;
+import com.example.KursovaWebSite.services.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,28 +55,28 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public BucketDTO getBucketByUser(String username) {
-        User user = userService.findByUsername(username);
+    public BucketDTO getBucketByUser(String email) {
+        Optional<User> user = userService.findByEmail(email);
 
-//        if (user == null || user.getBucket() == null)
-//            return new BucketDTO();
+        if (!user.isPresent() || user.get().getBucket() == null)
+            return new BucketDTO();
 
         BucketDTO bucketDTO = new BucketDTO();
         Map<Long, BucketDetailDTO> mapByBookId = new HashMap<>();
 
-//        List<Book> books = user.getBucket().getBooks();
-//        for (Book book: books) {
-//            BucketDetailDTO detail = mapByBookId.get(book.getId());
-//
-//            if (detail == null)
-//                mapByBookId.put(book.getId(), new BucketDetailDTO(book));
-//            else {
-//                detail.setAmount(detail.getAmount() + 1.0);
-//                detail.setSum(detail.getSum() + 1.0);
-//            }
-//        }
-//        bucketDTO.setBucketDetails(new ArrayList<>(mapByBookId.values()));
-//        bucketDTO.aggregate();
+        List<Book> books = user.get().getBucket().getBooks();
+        for (Book book: books) {
+            BucketDetailDTO detail = mapByBookId.get(book.getId());
+
+            if (detail == null)
+                mapByBookId.put(book.getId(), new BucketDetailDTO(book));
+            else {
+                detail.setAmount(detail.getAmount() + 1.0);
+                detail.setSum(detail.getSum() + 1.0);
+            }
+        }
+        bucketDTO.setBucketDetails(new ArrayList<>(mapByBookId.values()));
+        bucketDTO.aggregate();
 
         return bucketDTO;
     }

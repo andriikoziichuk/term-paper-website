@@ -2,6 +2,7 @@ package com.example.KursovaWebSite.models.book;
 
 import com.example.KursovaWebSite.models.receipt.ReceiptDetails;
 import com.example.KursovaWebSite.models.user.Bucket;
+import com.example.KursovaWebSite.models.user.User;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -33,15 +34,15 @@ public class Book {
     @Size(max = 2048, message = "Description of the book should be between 0 and 2048 characters")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private Genre genre;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "book_category",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
@@ -50,15 +51,21 @@ public class Book {
     @Min(value = 0, message = "Price cannot be lower than 0")
     private double price;
 
-//    @Lob
-//    @Column(columnDefinition = "MEDIUMBLOB")
-//    private String image;
+    @Lob
+    @Column(columnDefinition = "BYTEA")
+    private byte[] image;
 
     @ManyToMany(mappedBy = "books")
     private List<Bucket> buckets;
 
     @OneToMany(mappedBy = "book")
     private List<ReceiptDetails> receiptDetails;
+
+    @ManyToMany
+    @JoinTable(name = "user_book",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
+    private List<User> owners;
 
     @Override
     public boolean equals(Object o) {
@@ -71,5 +78,10 @@ public class Book {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return title + ", " + owners.toString();
     }
 }

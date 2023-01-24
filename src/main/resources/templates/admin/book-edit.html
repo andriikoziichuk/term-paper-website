@@ -1,0 +1,114 @@
+<head th:insert="parts/common :: head"></head>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit book</title>
+</head>
+
+<body>
+<header th:insert="parts/menu"></header>
+
+<div id="content" class="container">
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <form class="form-horizontal" th:action="@{/admin/book}" th:method="POST"
+              enctype="multipart/form-data" th:object="${book}">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Update the book</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="product_name">Title</label>
+                    <div class="col-md-4">
+                        <input id="product_name" th:field="*{title}" name="product_name" class="form-control input-md"
+                               required="" type="text">
+                        <div style="color:red;" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                            title error
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="description">Description</label>
+                    <div class="col-md-4">
+                        <input id="description" th:field="*{description}" name="description"
+                               class="form-control input-md" required="" type="text">
+                        <div style="color:red;" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                            description error
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="author">Author</label>
+                    <div class="col-md-4">
+                        <select id="author" th:field="*{author}" name="categories" class="form-control">
+                            <option th:each="author : ${authors}"
+                                    th:value="${author.id}"
+                                    th:text="${author.firstName} + ' ' + ${author.lastName}">
+                            </option>
+                        </select>
+                        <div style="color:red;" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">
+                            author error
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="genre">Genre</label>
+                    <div class="col-md-4">
+                        <select id="genre" th:field="*{genre}" name="genre" class="form-control">
+                            <option th:each="genre : ${genres}"
+                                    th:value="${genre.id}"
+                                    th:text="${genre.title}">
+                            </option>
+                        </select>
+                        <div style="color:red;" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">
+                            genre error
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="price">Price</label>
+                    <div class="col-md-4">
+                        <input id="price" name="price" th:field="*{price}" class="form-control input-md" required=""
+                               type="text">
+                        <div style="color:red;" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">
+                            price error
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <!-- File Button -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="image">Image</label>
+                            <img style="height: 40px; width: 40px;" th:src="*{'data:image/jpeg;base64,' + {image}}">
+                            <div class="col-md-4">
+                                <input id="image" name="image" class="input-file" type="file">
+                            </div>
+                            <div style="color:red;" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">
+                                image error
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="id" th:value="${book.id}">
+            </fieldset>
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+</div>
+
+<footer th:insert="parts/footer"></footer>
+</body>

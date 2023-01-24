@@ -1,6 +1,6 @@
 package com.example.KursovaWebSite.config;
 
-import com.example.KursovaWebSite.service.impl.UserDetailServiceImpl;
+import com.example.KursovaWebSite.services.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,7 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/admin/*").hasRole("ADMIN")
-                .antMatchers("/", "/auth/*", "/static/*", "/activate/*").permitAll()
+                .antMatchers("/", "/auth/*", "/static/*", "/search-result",
+                        "/book/*", "/site img/*", "/style.css", "/activate/*").permitAll()
                 .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and()
                     .formLogin()
@@ -37,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureUrl("/auth/login?error")
                 .and()
                     .logout()
-                    .logoutUrl("/logout")
+                    .logoutUrl("/auth/logout")
                     .logoutSuccessUrl("/auth/login");
     }
 

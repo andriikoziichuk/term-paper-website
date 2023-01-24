@@ -1,15 +1,13 @@
-package com.example.KursovaWebSite.service;
+package com.example.KursovaWebSite.services;
 
 import com.example.KursovaWebSite.models.user.User;
-import com.example.KursovaWebSite.dto.UserDTO;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import com.example.KursovaWebSite.dtos.UserDTO;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public interface UserService {
-    boolean save(UserDTO userDTO);
+    void save(UserDTO userDTO);
     void save(User user);
 
     List<UserDTO> getAll();
@@ -18,7 +16,14 @@ public interface UserService {
 
     void updateProfile(UserDTO dto);
 
-    void saveUser(User user, String username, Map<String, String> form);
-
     Optional<User> findByEmail(String email);
+
+    void update(User user);
+
+    UserDTO findByEmailAndMapToDto(String name);
+
+    void unblock(Long id);
+
+    void block(Long id);
+
 }

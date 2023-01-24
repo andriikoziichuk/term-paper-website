@@ -1,0 +1,40 @@
+<head th:insert="parts/common :: head"></head>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+
+<body>
+<header th:insert="parts/menu"></header>
+
+<div class="container" style="margin-top: 50px">
+    <h1>List of users</h1>
+    <table class="mt-4 table table-striped">
+        <thead>
+
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Baned</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td scope="row" th:text="${user.username}"></td>
+            <td th:text="${user.role}"></td>
+            <td><a th:href="'/admin/user/' + ${user.id}">Edit</a></td>
+            <td>
+                <a th:if="${user.active == true}" th:href="@{/admin/block/{id} (id = ${user.id})}"
+                   class="btn btn-danger">Block</a>
+                <a th:if="${user.active == false}" th:href="@{/admin/unblock/{id} (id = ${user.id})}"
+                   class="btn btn-warning">Unblock</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:insert="parts/footer"></footer>
+</body>

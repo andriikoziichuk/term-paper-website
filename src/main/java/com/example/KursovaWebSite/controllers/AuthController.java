@@ -1,12 +1,10 @@
 package com.example.KursovaWebSite.controllers;
 
-import com.example.KursovaWebSite.dto.UserDTO;
-import com.example.KursovaWebSite.models.user.User;
-import com.example.KursovaWebSite.service.UserService;
-import com.example.KursovaWebSite.util.UserValidator;
+import com.example.KursovaWebSite.dtos.UserDTO;
+import com.example.KursovaWebSite.services.UserService;
+import com.example.KursovaWebSite.utils.UserDTOValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,12 +17,12 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final UserValidator userValidator;
+    private final UserDTOValidator userDTOValidator;
     private final UserService userService;
 
     @Autowired
-    public AuthController(UserValidator userValidator, UserService userService) {
-        this.userValidator = userValidator;
+    public AuthController(UserDTOValidator userDTOValidator, UserService userService) {
+        this.userDTOValidator = userDTOValidator;
         this.userService = userService;
     }
 
@@ -37,7 +35,7 @@ public class AuthController {
     public String makeRegister(@ModelAttribute("user") @Valid UserDTO user,
                                BindingResult bindingResult) {
 
-        userValidator.validate(user, bindingResult);
+        userDTOValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors())
             return "/auth/register";

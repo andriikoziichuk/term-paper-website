@@ -1,4 +1,4 @@
-package com.example.KursovaWebSite.dto;
+package com.example.KursovaWebSite.dtos;
 
 import lombok.*;
 

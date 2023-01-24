@@ -1,5 +1,6 @@
 package com.example.KursovaWebSite.models.user;
 
+import com.example.KursovaWebSite.models.book.Book;
 import com.example.KursovaWebSite.models.receipt.Receipt;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -45,6 +46,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Receipt> receipts;
 
+    @ManyToMany(mappedBy = "owners")
+    private List<Book> liked;
+
 //    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
 //    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
 //    @Enumerated(EnumType.STRING)
@@ -65,5 +69,10 @@ public class User {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return id + ", " + username;
     }
 }

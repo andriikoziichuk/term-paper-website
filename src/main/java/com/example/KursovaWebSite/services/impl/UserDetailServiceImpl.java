@@ -1,4 +1,4 @@
-package com.example.KursovaWebSite.service.impl;
+package com.example.KursovaWebSite.services.impl;
 
 import com.example.KursovaWebSite.models.user.User;
 import com.example.KursovaWebSite.repositories.UserRepository;
@@ -23,9 +23,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByEmail(email);
-
-        System.out.println(email);
-        System.out.println(user.isPresent());
 
         if (!user.isPresent())
             throw new UsernameNotFoundException("User not found!");

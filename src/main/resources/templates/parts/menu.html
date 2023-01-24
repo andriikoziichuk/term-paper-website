@@ -1,4 +1,6 @@
-<div th:fragment="header" class="head">
+<div th:fragment="header" class="head"
+     xmlns:th="https://www.thymeleaf.org"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
     <link rel="stylesheet" href="/style.css">
     <a th:href="@{/}" class="logo scale make-it-slow">
         <img src="/site img/img_1.png" alt="logo">
@@ -6,15 +8,15 @@
 
     <div class="nav ml-30">
         <ul>
-            <li sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/user}">USERS</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/users}">USERS</a></li>
         </ul>
     </div>
 
     <div class="nav">
         <ul>
             <li>
-                <form action="" method="get">
-                    <input type="text" id="search" class="form-control" name="title"
+                <form th:action="@{/search-result}" th:method="GET">
+                    <input type="text" id="search" class="form-control" name="keyword"
                            placeholder="Search"/>
                 </form>
             </li>
@@ -28,7 +30,7 @@
                 <li>Hello, <a th:href="@{/user/profile}"><span sec:authentication="principal.username"></span></a></li>
             </ul>
             <ul>
-                <li><a th:href="@{/logout}">Log out</a></li>
+                <li th:insert="parts/common :: logOut"></li>
             </ul>
         </div>
         <div sec:authorize="!isAuthenticated()" class="nav" style="margin: auto 20px;">

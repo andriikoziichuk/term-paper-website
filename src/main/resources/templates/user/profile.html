@@ -2,24 +2,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Profile</title>
 </head>
 
 <body>
 <header th:insert="parts/menu"></header>
 
-<div class="container" style="margin-top: 50px">
+<div class="container">
+    <br>
+    <h1>User profile</h1>
 
-    <div th:if="${param.error}">
-        Invalid username and password.
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
-    </div>
-
-    <form th:action="@{/auth/register}" th:object="${user}" th:method="POST">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-
+    <form style="margin-top: 30px" th:action="@{/user/profile}" th:object="${user}" method="post">
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label"> User name :</label>
             <div class="col-sm-3">
@@ -49,7 +42,7 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="password">Repeat password: </label>
+            <label class="col-sm-2 col-form-label">Repeat password: </label>
             <div class="col-sm-3">
                 <input type="password" name="matchingPassword" th:field="*{matchingPassword}" class="form-control"
                        placeholder="Repeat password"/>
@@ -58,7 +51,9 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">Register</button>
+        <input type="hidden" name="id" th:value="${user.id}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button class="btn btn-primary" type="submit">Save</button>
     </form>
 
     <div th:replace="parts/common :: scripts"></div>

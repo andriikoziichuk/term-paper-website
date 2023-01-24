@@ -18,10 +18,14 @@
                     <img class="cart scale" src="/site%20img/img_4.png" alt="">
                 </a>
                 <!--                th:src="${#lists.contains(liked, book)} ? '/site%20img/img_4.png' : '/site%20img/img_4_fill.png'" -->
-                <a th:href="@{/{id}/bucket(id=${book.id})}">
+                <a th:href="@{/bucket/add/{id}(id=${book.id})}">
                     <img class="cart scale" src="/site%20img/img.png" alt="">
                 </a>
             </div>
+        </div>
+        <div style="margin: auto 0; text-align: center">
+            <a sec:authorize="hasRole('ADMIN')" style="text-decoration: none"
+               th:href="@{/admin/book/{id}(id=${book.id})}">Edit book</a>
         </div>
     </div>
 </div>

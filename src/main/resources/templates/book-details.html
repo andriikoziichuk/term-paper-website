@@ -1,9 +1,9 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:insert="parts/common :: head"></head>
+
 <head>
-  <title>Blog site</title>
+  <title>Book details</title>
 </head>
+
 <body>
 <header th:insert="parts/menu"></header>
 
@@ -14,8 +14,9 @@
     <h3 th:text="${book.description}"></h3>
     <h3 th:text="${book.price}"></h3>
     <h3 th:text="${book.author.fullName}"></h3>
-    <h3 th:text="${book.photoPath}"></h3>
+    <h3 th:text="${book.image}"></h3>
   </div>
 </div>
+
+<footer th:insert="parts/footer"></footer>
 </body>
-</html>

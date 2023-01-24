@@ -1,8 +1,8 @@
-package com.example.KursovaWebSite.service;
+package com.example.KursovaWebSite.services;
 
 import com.example.KursovaWebSite.models.user.Bucket;
 import com.example.KursovaWebSite.models.user.User;
-import com.example.KursovaWebSite.dto.BucketDTO;
+import com.example.KursovaWebSite.dtos.BucketDTO;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface BucketService {
 
     void addBook(Bucket bucket, List<Long> bookIds);
 
-    BucketDTO getBucketByUser(String username);
+    BucketDTO getBucketByUser(String email);
 
     void removeBook(Bucket bucket, List<Long> bookIds);
 }

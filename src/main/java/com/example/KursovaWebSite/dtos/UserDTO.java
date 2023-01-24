@@ -1,6 +1,5 @@
-package com.example.KursovaWebSite.dto;
+package com.example.KursovaWebSite.dtos;
 
-import com.example.KursovaWebSite.models.user.Role;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -32,4 +31,6 @@ public class UserDTO {
     private String email;
 
     private String role;
+
+    private boolean active;
 }

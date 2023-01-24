@@ -5,6 +5,33 @@
     box-sizing: border-box;
     font-family: 'Lexend', sans-serif;
 }
+/*/////////////////////////////////////////*/
+html {
+    height: 100%;
+}
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    width: 100%;
+}
+header {
+    width: 100%;
+    text-align: center;
+}
+main {
+    padding: 5px 100px 60px;
+}
+footer {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+/*/////////////////////////////////////////*/
 body {
     background-color: #DCDCDC;
 
@@ -121,7 +148,7 @@ footer label {
 }
 .wrapper{
     width: 320px;
-    height: 470px;
+    height: 450px;
     border-radius: 10px;
     border: 1px solid gray;
 }
@@ -181,4 +208,3 @@ section{
 .make-it-slow:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
-.bucket
